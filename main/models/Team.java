@@ -18,6 +18,7 @@ public class Team {
         house == null || keeper == null || seeker == null) {
             throw new IllegalArgumentException("All names cannot be blank!");
         }
+
         this.house = house;
         this.keeper = keeper;
         this.seeker = seeker;
@@ -58,18 +59,30 @@ public class Team {
     }
 
     public void setHouse(String house) {
+        if (house.isBlank() || house == null) {
+            throw new IllegalArgumentException("House cannot be blank!");
+        }
         this.house = house;
     }
 
     public void setKeeper(String keeper) {
+        if (keeper.isBlank() || keeper == null) {
+            throw new IllegalArgumentException("Keeper cannot be blank!");
+        }
         this.keeper = keeper;
     }
 
     public void setSeeker(String seeker) {
+        if (seeker.isBlank() || seeker == null) {
+            throw new IllegalArgumentException("Seeker cannot be blank!");
+        }
         this.seeker = seeker;
     }
 
     public void setChasers(String[] chasers) {
+        if (chasers.length != 3 || Team.hasNullOrBlank(chasers)) {
+            throw new IllegalArgumentException("Chasers must contain 3 eligible players (no null anonymous)!");
+        }
         this.chasers = Arrays.copyOf(chasers, chasers.length);
     }
 
