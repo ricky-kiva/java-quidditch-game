@@ -6,12 +6,14 @@ public class Game {
     
     private static final int QUAFFLE_POINTS = 10;
     private static final int SNITCH_POINTS = 150;
+    private static int gameCount;
     private HashMap<Team, Integer> scoreboard;
 
     public Game(Team home, Team away) {
         this.scoreboard = new HashMap<Team, Integer>();
         this.scoreboard.put(new Team(home), 0);
         this.scoreboard.put(new Team(away), 0);
+        gameCount++;
     }
 
     public Integer getScore(Team team) {
@@ -23,6 +25,9 @@ public class Game {
     }
 
     public Team getTeam(String name) {
-        return null; // unfinished
+        return this.scoreboard.keySet().stream()
+        .filter(key -> key.getHouse().equals(name))
+        .findFirst()
+        .orElse(null);
     }
 }
