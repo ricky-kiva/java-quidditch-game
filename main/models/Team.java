@@ -1,6 +1,7 @@
 package main.models;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Team {
 
@@ -96,6 +97,26 @@ public class Team {
 
      public static String getPositionKeeper() {
          return POSITION_KEEPER;
+     }
+
+     @Override
+     public boolean equals(Object obj) {
+         if (obj == null) {
+            return false;
+         }
+         if (!(obj instanceof Team)) {
+            return false;
+         }
+         Team team = (Team) obj;
+         return this.house.equals(team.house) &&
+         this.keeper.equals(team.keeper) &&
+         this.seeker.equals(team.seeker) &&
+         Arrays.toString(this.chasers).equals(Arrays.toString(team.chasers));
+     }
+
+     @Override
+     public int hashCode() {
+         return Objects.hash(house, keeper, seeker, Arrays.toString(chasers));
      }
 
      @Override
