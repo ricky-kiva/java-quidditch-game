@@ -14,9 +14,18 @@ public class Team {
     private String[] chasers;
 
     public Team(String house, String keeper, String seeker, String[] chasers) {
+        if (house.isBlank() || keeper.isBlank() || seeker.isBlank() ||
+        house == null || keeper == null || seeker == null) {
+            throw new IllegalArgumentException("All names cannot be blank!");
+        }
         this.house = house;
         this.keeper = keeper;
         this.seeker = seeker;
+
+        if (chasers.length != 3) {
+            throw new IllegalArgumentException("Chasers must contain 3 players!");
+        }
+
         this.chasers = Arrays.copyOf(chasers, 3);
     }
 
