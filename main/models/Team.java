@@ -22,7 +22,7 @@ public class Team {
         this.keeper = keeper;
         this.seeker = seeker;
 
-        if (chasers.length != 3 || Team.hasNull(chasers)) {
+        if (chasers.length != 3 || Team.hasNullOrBlank(chasers)) {
             throw new IllegalArgumentException("Chasers must contain 3 eligible players (no null anonymous)!");
         }
 
@@ -36,8 +36,9 @@ public class Team {
         this.chasers = Arrays.copyOf(source.chasers, source.chasers.length);
     }
 
-    public static boolean hasNull(String[] chasers) {
-        return Arrays.stream(chasers).anyMatch(chaser -> chaser == null);
+    public static boolean hasNullOrBlank(String[] chasers) {
+        return Arrays.stream(chasers).anyMatch(chaser -> chaser == null) ||
+        Arrays.stream(chasers).anyMatch(chaser -> chaser.isBlank());
     }
     
     public String getHouse() {

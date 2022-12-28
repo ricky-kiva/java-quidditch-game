@@ -8,7 +8,8 @@ import main.models.Game;
 
 public class TeamTest {
     @Test
-    public void hasNullTest() {
-        assertTrue(Team.hasNull(new String[] {null, "Sally", "Kathy"}));
+    public void hasNullOrBlankTest() {
+        assertTrue(Team.hasNullOrBlank(new String[] {null, "Sally", "Kathy"}));
+        assertTrue(Team.hasNullOrBlank(new String[] {"  ", "Sally", "Kathy"}));
     }
 }
