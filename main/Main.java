@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import main.models.Game;
 import main.models.Team;
@@ -26,6 +27,8 @@ public class Main {
             game = new Game(home, away);
             startGame();
 
+            printResult(home, away);
+
         } catch (FileNotFoundException e) {
 
             System.out.println(e);
@@ -43,33 +46,27 @@ public class Main {
         return Arrays.copyOf(arr, arr.length);
      }
 
-
-    /** Function name: startGame
-     * 
-     * Inside the function:
-     *    1. Grabs each play from plays.txt and calls game.simulate(play);
-     *    2. Prints the return from game.simulate(play)
-     *        - println("\n" + <return> + "\n");
-     */
-
     public static void startGame() throws FileNotFoundException {
         FileInputStream fis = new FileInputStream(PLAYS_PATH);
         Scanner scan = new Scanner(fis);
         while(scan.hasNextLine()) {
             System.out.println("\n" + game.simulate(scan.nextLine()));
+            waitSec(2);
         }
-        System.out.println();
         scan.close();
     }
 
-
-    /** Function name: printResult()
-     * 
-     * Inside the function:
-     *    1. Prints the final score: println("\nGRYFFINDOR: " + <gryffindor score> + " SLYTHERIN: " + <slytherin score>);
-     *    2. Prints the winner: println("\n" + <winner team name> + " WINS!");
-     *  
-     */
+    public static void printResult(Team home, Team away) {
+        int scoreHome = game.getScore(game.getTeam(home.getHouse()));
+        int scoreAway = game.getScore(game.getTeam(away.getHouse()));
+        System.out.println("\n" + home.getHouse() + ": " + scoreHome);
+        System.out.println(away.getHouse() + ": " + scoreAway);
+        if (scoreHome > scoreAway) {
+            System.out.println("\n> " + home.getHouse() + " WINS !!!\n");
+        } else {
+            System.out.println("\n> " + away.getHouse() + " WINS !!!\n");
+        }
+    }
 
     /**
      * Function name: wait
@@ -78,6 +75,16 @@ public class Main {
      * Inside the function:
      *  1. Make the code sleep for X seconds.
      */
+
+    public static void waitSec(int sec) {
+        TimeUnit time = TimeUnit.SECONDS;
+        try {
+            time.sleep(sec);
+        } catch(InterruptedException e) {
+            System.out.println(e);
+        }
+        
+    }
 
 
   }
