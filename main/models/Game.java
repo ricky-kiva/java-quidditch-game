@@ -24,6 +24,9 @@ public class Game {
     }
 
     public void setScore(Team team, Integer score) {
+        if (team == null || score == null) {
+            throw new IllegalArgumentException("Can't find that team!");
+        }
         this.scoreboard.put(team, (getScore(team) + score));
     }
 
@@ -67,6 +70,8 @@ public class Game {
         } else if (this.getPlaceholder(play).equals(Team.getPositionSeeker())) {
             catchSnitch(team);
             return this.replacePlaceholder(play, Team.getPositionSeeker(), team.getSeeker());
+        } else if (this.getPlaceholder(play).equals(Team.getPositionKeeper())) {
+            return this.replacePlaceholder(play, Team.getPositionKeeper(), team.getKeeper());
         } else {
             return "Nothing happened this round!";
         }
