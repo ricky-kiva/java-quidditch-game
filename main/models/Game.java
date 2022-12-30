@@ -1,6 +1,7 @@
 package main.models;
 
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;;
 
@@ -53,4 +54,18 @@ public class Game {
     public void catchSnitch(Team team) {
         this.setScore(team, SNITCH_POINTS);
     }
+
+    public Team getRandomTeam() {
+        return (Team) (this.scoreboard.keySet().toArray())[randomInt(0, 1)];
+    }
+
+    public String simulate(String play) {
+        return play;
+    }
+
+    public int randomInt(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, (max+1));
+    }
+
+
 }
