@@ -1,24 +1,46 @@
-package src.main;
-import src.main.models.Game;
+package main;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import main.models.Game;
+import main.models.Team;
 
 public class Main {
 
     static Game game;
+    static final String TEAMS_PATH = "./main/teams.txt";
+    static final String PLAYS_PATH = "./main/plays.txt";
 
     public static void main(String[] args) {
 
+        try {
+
+            String[][] data = getData();
+
+            Team home = new Team(data[0][0], data[0][1], data[0][2], new String[] {data[0][3], data[0][4], data[0][5]});
+            Team away = new Team(data[1][0], data[1][1], data[1][2], new String[] {data[1][3], data[1][4], data[1][5]});
+
+            game = new Game(home, away);
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println(e);
+
+        }
         
     }
 
+     public static String[][] getData() throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(TEAMS_PATH);
+        Scanner scan = new Scanner(fis);
+        String[][] arr = {scan.nextLine().split(","), scan.nextLine().split(",")};
 
-    /**
-     * Function name: getData
-     * @return (String[][])
-     * @throws FileNotFoundException
-     * 
-     * Inside the function:
-     *   1. Returns data from TEAMS_FILE as a String[][] array
-     */
+        scan.close();
+        return Arrays.copyOf(arr, arr.length);
+     }
 
 
     /** Function name: startGame
