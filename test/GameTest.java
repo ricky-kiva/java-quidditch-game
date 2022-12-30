@@ -37,4 +37,10 @@ public class GameTest {
         assertEquals(game.getScore(game.getTeam("GRYFFINDOR")), 20);
     }
 
+    @Test
+    public void catchSnitchTest() {
+        game.catchSnitch(game.getTeam("AVATAR"));
+        assertEquals(game.getScore(game.getTeam("AVATAR")), 150);
+    }
+
 }
