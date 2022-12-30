@@ -1,6 +1,8 @@
 package main.models;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;;
 
 public class Game {
     
@@ -29,5 +31,14 @@ public class Game {
         .filter(key -> key.getHouse().equals(name))
         .findFirst()
         .orElse(null);
+    }
+
+    public String getPlaceholder(String line) {
+        Pattern pattern = Pattern.compile("<\\w+>");
+        Matcher matcher = pattern.matcher(line);
+        while(matcher.find()) {
+            return matcher.group(0).substring(1, ((matcher.group(0).length()) - 1));
+        }
+        return "Not a point sentence.";
     }
 }
