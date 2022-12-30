@@ -1,4 +1,4 @@
-# quidditch-game
+# Java Quidditch Game (Terminal Simulation)
 It's Harry Potter babe! Import team structure &amp; get play scenario from doc (.txt). Computer will manipulate the play and shows the winner.
 
 - Compile Main.java --> javac ./main/Main.java
