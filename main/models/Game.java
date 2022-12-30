@@ -33,12 +33,16 @@ public class Game {
         .orElse(null);
     }
 
-    public String getPlaceholder(String line) {
+    public String getPlaceholder(String play) {
         Pattern pattern = Pattern.compile("<\\w+>");
-        Matcher matcher = pattern.matcher(line);
+        Matcher matcher = pattern.matcher(play);
         while(matcher.find()) {
             return matcher.group(0).substring(1, ((matcher.group(0).length()) - 1));
         }
-        return "Not a point sentence.";
+        return null;
+    }
+
+    public String replacePlaceholder(String play, String placeholder, String value) {
+        return play.replace(("<" + placeholder + ">"), value);
     }
 }
