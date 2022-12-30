@@ -24,6 +24,7 @@ public class Main {
             Team away = new Team(data[1][0], data[1][1], data[1][2], new String[] {data[1][3], data[1][4], data[1][5]});
 
             game = new Game(home, away);
+            startGame();
 
         } catch (FileNotFoundException e) {
 
@@ -50,6 +51,16 @@ public class Main {
      *    2. Prints the return from game.simulate(play)
      *        - println("\n" + <return> + "\n");
      */
+
+    public static void startGame() throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(PLAYS_PATH);
+        Scanner scan = new Scanner(fis);
+        while(scan.hasNextLine()) {
+            System.out.println("\n" + game.simulate(scan.nextLine()));
+        }
+        System.out.println();
+        scan.close();
+    }
 
 
     /** Function name: printResult()
