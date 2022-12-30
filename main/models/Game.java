@@ -47,10 +47,10 @@ public class Game {
     }
 
     public void quaffleScore(Team team) {
-        this.setScore(team, this.getScore(team) + QUAFFLE_POINTS);
+        this.setScore(team, QUAFFLE_POINTS);
     }
 
     public void catchSnitch(Team team) {
-        this.setScore(team, this.getScore(team) + SNITCH_POINTS);
+        this.setScore(team, SNITCH_POINTS);
     }
 }
