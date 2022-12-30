@@ -60,7 +60,16 @@ public class Game {
     }
 
     public String simulate(String play) {
-        return play;
+        Team team = getRandomTeam();
+        if (this.getPlaceholder(play).equals(Team.getPositionChaser())) {
+            quaffleScore(team);
+            return this.replacePlaceholder(play, Team.getPositionChaser(), (team.getChasers())[randomInt(0, 2)]);
+        } else if (this.getPlaceholder(play).equals(Team.getPositionSeeker())) {
+            catchSnitch(team);
+            return this.replacePlaceholder(play, Team.getPositionSeeker(), team.getSeeker());
+        } else {
+            return "Nothing happened this round!";
+        }
     }
 
     public int randomInt(int min, int max) {
