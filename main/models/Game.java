@@ -45,4 +45,8 @@ public class Game {
     public String replacePlaceholder(String play, String placeholder, String value) {
         return play.replace(("<" + placeholder + ">"), value);
     }
+
+    public void quaffleScore(Team team) {
+        this.setScore(team, QUAFFLE_POINTS);
+    }
 }

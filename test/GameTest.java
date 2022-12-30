@@ -1,5 +1,6 @@
 package test;
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class GameTest {
     @Before
     public void setup() {
         Team home = new Team("GRYFFINDOR", "Rezy", "Ricky", new String[] {"Loak", "Kiri", "Tuk"});
-        Team away = new Team("Jake Sully", "Navi", "Avatar", new String[] {"Waters", "Gilmour", "Syd"});
+        Team away = new Team("AVATAR", "Jake Sully", "Neytiri", new String[] {"Waters", "Gilmour", "Syd"});
         
         game = new Game(home, away);
     }
@@ -27,6 +28,13 @@ public class GameTest {
     @Test
     public void replacePlaceholderTest() {
         assertEquals(game.replacePlaceholder("<chaser> gets the next pass","chaser","Katie"), "Katie gets the next pass");
+    }
+
+    @Test
+    public void quaffleScoreTest() {
+        game.quaffleScore(game.getTeam("GRYFFINDOR"));
+        game.quaffleScore(game.getTeam("GRYFFINDOR"));
+        assertEquals(game.getScore(game.getTeam("GRYFFINDOR")), 20);
     }
 
 }
